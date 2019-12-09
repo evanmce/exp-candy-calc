@@ -65,15 +65,12 @@ def calc_fluct_lvls():
         lvls.append(xp)
     return lvls
 
-# def calc_candy_amount(from_lvl, to_lvl, lvls, candy_type):
-
-
 def read_pkmn_file(filename):
     pkmn = []
-    f = open(filename, "r")
-    for name in f:
-        pkmn.append(name)
-    f.close()
+    with open(filename) as fp:
+        for line in fp:
+            pkmn.append(line.rstrip())
+    fp.close()
     return pkmn
 
 
@@ -124,10 +121,8 @@ def main():
 
     args = parser.parse_args()
 
-    if args.candy:
-        print("calculating using XS candies")
-
-    
+    level_group = pkmn_dict.get('{}'.format(args.pkmn_name))
+    print(level_group)
 
 if __name__ == "__main__":
     main()
