@@ -122,7 +122,45 @@ def main():
     args = parser.parse_args()
 
     level_group = pkmn_dict.get('{}'.format(args.pkmn_name))
-    print(level_group)
+    lvl_f = args.lvl_from - 1
+    lvl_t = args.lvl_to - 1
+    exp_f = 0
+    exp_t = 0
+    num_candy = 0
+
+    if level_group == 'erratic':
+        # print('lvl_from: {} lvl_to: {}'.format(lvl_f, lvl_t + 1))
+        # print('exp_from: {} exp_to: {}'.format(erratic[lvl_f], erratic[lvl_t]))
+        exp_f = erratic[lvl_f]
+        exp_t = erratic[lvl_t]
+    elif level_group == 'fast':
+        exp_f = fast[lvl_f]
+        exp_t = fast[lvl_t]
+    elif level_group == 'medium_fast':
+        exp_f = med_fast[lvl_f]
+        exp_t = med_fast[lvl_t]
+    elif level_group == 'medium_slow':
+        exp_f = med_slow[lvl_f]
+        exp_t = med_slow[lvl_t]
+    elif level_group == 'slow':
+        exp_f = slow[lvl_f]
+        exp_t = slow[lvl_t]
+    elif level_group == 'fluctuating':
+        exp_f = fluct[lvl_f]
+        exp_t = fluct[lvl_t]   
+
+    if args.candy == 'xs':
+        num_candy = math.ceil((exp_t - exp_f) / xs)
+    elif args.candy == 's':
+        num_candy = math.ceil((exp_t - exp_f) / s)
+    elif args.candy == 'm':
+        num_candy = math.ceil((exp_t - exp_f) / m)
+    elif args.candy == 'l':
+        num_candy = math.ceil((exp_t - exp_f) / l)
+    elif args.candy == 'xl':
+        num_candy = math.ceil((exp_t - exp_f) / xl)
+
+    print("number of candies to reach lvl {}: {}".format(args.lvl_to, num_candy))  
 
 if __name__ == "__main__":
     main()
